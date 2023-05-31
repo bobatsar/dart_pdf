@@ -301,9 +301,11 @@ class Table extends Widget with SpanningWidget {
       final tableRow = <Widget>[];
 
       for (final dynamic cell in headers) {
+        final align = headerAlignments[tableRow.length] ?? headerAlignment;
+        final textAlign = _textAlign(align);
         tableRow.add(
           Container(
-            alignment: headerAlignments[tableRow.length] ?? headerAlignment,
+            alignment: align,
             padding: headerPadding,
             decoration: headerCellDecoration,
             constraints: BoxConstraints(minHeight: headerHeight),
@@ -312,6 +314,7 @@ class Table extends Widget with SpanningWidget {
                   ? cell.toString()
                   : headerFormat(tableRow.length, cell),
               style: headerStyle,
+              textAlign: textAlign,
             ),
           ),
         );
